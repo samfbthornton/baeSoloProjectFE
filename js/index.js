@@ -18,6 +18,7 @@
     const updateBeerName = document.querySelector("#updateBeerName");
     const updateAbv = document.querySelector("#updateAbv");
     const updateNice = document.querySelector("#updateNice");
+    const getIdButton = document.querySelector("#getIdButton");
 
 
 
@@ -62,12 +63,15 @@
         axios.get(`${baseURL}/getAllBeers`)
             .then(res => {//handle response with callback. waits for responds before working
                 const beers = res.data;
+                const getAllHistory = document.createElement('p');
 
                 getAllOutput.innerHTML = "";
 
                 beers.forEach(beer => renderCraftBeer(beer, getAllOutput));
 
                 console.log("ALL BEERS DATA: ", res.data);
+                getAllHistory.textContent = `All Beers Shown`;
+                historyOutput.appendChild(getAllHistory);
             }).catch(err => console.log(err));//handle error
     }
 
@@ -77,19 +81,20 @@
             .then(res => {
                 const beer = res.data;
                 
-                brewery.value = beer.brewery;
-                beerName.value = beer.name;
-                abv.value = beer.abv;
-                nice.value = beer.nice;
+                updateBrewery.value = beer.brewery;
+                updateBeerName.value = beer.name;
+                updateAbv.value = beer.abv;
+                updateNice.value = beer.nice;
 
                 console.log("BEER DATA: ", beer);
-                writeHistory(beer.id, brewery.value, beerName.value, abv.value, nice.value);
+
+                writeHistory(beer.id, beer.brewery, beer.name, beer.abv, beer.nice);
             }).catch
             (err => console.log(err));
         //alert("Please try again with a different ID!") need to edit so only pops up when an error
     }
 
-    document.querySelector("section#getBeerById > button").addEventListener("click", idSearch);
+    document.querySelector("div#getBeerById > button").addEventListener("click", idSearch);
 
     const nameSearch = () => {
 
@@ -112,18 +117,22 @@
         // alert("Please try again with a different name!") need to edit so only pops up when an error
     }
 
-    document.querySelector("section#getBeerByName > button").addEventListener("click", nameSearch);
+    document.querySelector("#getIdButton").addEventListener("click", nameSearch);
 
 
-    const renderCraftBeer = (beer, outputDiv) => {
+    const renderCraftBeer = (beer, getAllOutput) => {
         const beerColumn = document.createElement('div');
+        //beerColumn.style = "background-color: lightblue";
         beerColumn.classList.add("col");
 
         const beerCard = document.createElement('div');
+        beerCard.style = "background-color: lightblue";
+        
         beerCard.classList.add("card");
         beerColumn.appendChild(beerCard);
 
         const newCraftBeer = document.createElement("div");
+        newCraftBeer.style = "background-color: lightblue";
         newCraftBeer.classList.add("card-body");
 
         const brewery = document.createElement("h3");
@@ -156,20 +165,20 @@
 
         const deleteButton = document.createElement("button");
         deleteButton.innerText = "DELETE";
-        deleteButton.style = "background-color: slategrey"
+        deleteButton.style = "background-color: purple";
         deleteButton.classList.add("btn", "btn-primary");
         deleteButton.addEventListener("click", () => deleteBeer(beer.id));
 
         const updateButton = document.createElement("button");
         updateButton.innerText = "UPDATE";
-        updateButton.style = "background-color: slategrey"
+        updateButton.style = "background-color: darkblue";
         updateButton.classList.add("btn", "btn-primary");
         updateButton.addEventListener("click", () => updateBeer(beer.id));
 
         newCraftBeer.appendChild(updateButton);
         newCraftBeer.appendChild(deleteButton);
         beerCard.appendChild(newCraftBeer)
-        outputDiv.appendChild(beerColumn);
+        getAllOutput.appendChild(beerColumn);
 
     }
 
@@ -188,13 +197,10 @@
                 console.log(beer.name);
             })
 
-        const updateForm = document.querySelector("section#updateBeer > form");
+        const updateForm = document.querySelector("#updateform");
 
         updateForm.addEventListener("submit", (e) => {
             e.preventDefault();
-
-            console.log("THIS: ", beerForm);
-            console.log("BREWERY: ", beerForm.brewery);
 
             const form = e.target;
 
