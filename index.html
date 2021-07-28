@@ -13,87 +13,84 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
-<body class= "container">
-    <main class = "row">
-        <section id="heading">
-            <H2>CRAFT BEER DIARY</H2>
+<body class="container" style="background-color: powderblue;">
+    <main class="row">
+        <section id="heading" style="text-align: center" ;>
+            <H2 style="color: darkblue;">CRAFT BEER DIARY</H2>
             <img src="./beerphoto.jpg" class="img-fluid" alt="beerphoto">
         </section>
-        <section id="createBeer">
-            <h4>ADD NEW BEER</h4>
+        <section id="createBeer" class="col">
+            <h4 style="color: darkblue;">ADD NEW BEER</h4>
             <form>
                 <label for="createBrewery">ADD BREWERY NAME</label>
                 <br>
-                <input id="createBrewery" type="text" style="background-color: slategrey" name="brewery" required>
+                <input id="createBrewery" type="text" style="background-color: slateblue" name="brewery" required>
                 <br>
                 <label for="createBeerName">ADD BEER NAME</label>
                 <br>
-                <input id="createBeerName" type="text" style="background-color: slategrey" name="beerName" required>
+                <input id="createBeerName" type="text" style="background-color: slateblue" name="beerName" required>
                 <br>
                 <label for="createAbv">ADD ABV VALUE</label>
                 <br>
-                <input id="createAbv" type="number" min="0" step="0.1" style="background-color: slategrey" name="abv"
+                <input id="createAbv" type="number" min="0" step="0.1" style="background-color: slateblue" name="abv"
                     required>
                 <br>
                 <label for="createNice">WOULD YOU HAVE IT AGAIN?</label>
                 <br>
-                <select id="createNice" type="boolean" style="background-color: slategrey" name="nice" required>
-                    <option value="true" boolean="true" style="background-color: slategrey">YES</option>
-                    <option value= "false" boolean="false" style="background-color: slategrey">NO</option>
+                <select id="createNice" type="boolean" style="background-color: slateblue" name="nice" required>
+                    <option value="true" boolean="true" style="background-color: white">YES</option>
+                    <option value="false" boolean="false" style="background-color: white">NO</option>
                 </select>
                 <br>
                 <br>
-                <button type="reset" style="background-color: slategrey">RESET</button>
-                <button type="submit" style="background-color: slategrey">SUBMIT</button>
+                <button type="reset" style="background-color: slateblue">RESET</button>
+                <button type="submit" style="background-color: slateblue">SUBMIT</button>
             </form>
-        </section>
-        <section id="getBeerById" class="col">
-            <h4>GET BEER BY ID</h4>
-            <label for="idOfBeer">Enter ID</label>
-            <input id="idOfBeer" type="number" min="1" style="background-color: slategrey">
-            <button id="get" style="background-color: slategrey;">GET</button>
-        </section>
-        <section id="getBeerByName">
-            <h4>GET BEER BY NAME</h4>
-            <label for="nameOfBeer">Enter Name</label>
-            <input id="nameOfBeer" type="text" style="background-color: slategrey">
-            <button id="get2" style="background-color: slategrey;">GET</button>
-            <br>
-            <div id="getByNameOutput">
-            </div>
-        </section>
-        <section id="getAllBeers">
-            <h4>GET ALL BEERS</h4>
-            <div id="getAllOutput">
-            </div>
-        </section>
-        <section id="updateBeer">
-            <h4>UPDATE BEER</h4>
-            <form>
+            <h4 style="color: darkblue;">UPDATE BEER</h4>
+            <form id="updateform">
                 <label for="updateBrewery">ADD BREWERY NAME</label>
                 <br>
-                <input id="updateBrewery" type="text" style="background-color: slategrey" name="brewery" required>
+                <input id="updateBrewery" type="text" style="background-color: slateblue" name="brewery" required>
                 <br>
                 <label for="updateBeerName">ADD BEER NAME</label>
                 <br>
-                <input id="updateBeerName" type="text" style="background-color: slategrey" name="beerName" required>
+                <input id="updateBeerName" type="text" style="background-color: slateblue" name="beerName" required>
                 <br>
                 <label for="updateAbv">ADD ABV VALUE</label>
                 <br>
-                <input id="updateAbv" type="number" min="0" step="0.1" style="background-color: slategrey" name="abv"
+                <input id="updateAbv" type="number" min="0" step="0.1" style="background-color: slateblue" name="abv"
                     required>
                 <br>
                 <label for="updateNice">WOULD YOU HAVE IT AGAIN?</label>
                 <br>
-                <select id="updateNice" type="boolean" style="background-color: slategrey" name="nice" required>
-                    <option value="true" style="background-color: slategrey">Yes</option>
-                    <option value="false" style="background-color: slategrey">No</option>
+                <select id="updateNice" type="boolean" style="background-color: slateblue" name="nice" required>
+                    <option value="true" style="background-color: white">Yes</option>
+                    <option value="false" style="background-color: white">No</option>
                 </select>
                 <br>
                 <br>
-                <button type="reset" style="background-color: slategrey">RESET</button>
-                <button type="submit" style="background-color: slategrey">SUBMIT</button>
+                <button type="reset" style="background-color: slateblue">RESET</button>
+                <button type="submit" style="background-color: slateblue">SUBMIT</button>
             </form>
+            <div id="getBeerById" class="col-4">
+                <h4 style="color: darkblue;">GET BEER BY ID</h4>
+                <label for="idOfBeer">Enter ID</label>
+                <input id="idOfBeer" type="number" min="1" style="background-color: slateblue">
+                <button id="get" style="background-color: slateblue;">GET</button>
+            </div>
+            <div id="getBeerByName" class="col-4">
+                <h4 style="color: darkblue;">GET BEER BY NAME</h4>
+                <label for="nameOfBeer">Enter Name</label>
+                <input id="nameOfBeer" type="text" style="background-color: slateblue">
+                <button id="getIdButton" style="background-color: slateblue;">GET</button>
+                <br>
+                <div id="getByNameOutput">
+                </div>
+        </section>
+        <section id="getAllBeers" class="col-8">
+            <h4 style="color: darkblue;">ALL BEERS</h4>
+            <div id="getAllOutput" class="card-group row row-cols-3" style="color: blue;">
+            </div>
         </section>
         <h2>HISTORY</h2>
         <section>
