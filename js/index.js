@@ -142,10 +142,10 @@
         newCraftBeer.appendChild(abv);
 
         const nice = document.createElement("p");
-        nice.innerText = `${beer.nice}`
-        // if (beer.nice = true) { nice.innerText = `It's Yummy!` }
-        // else if (beer.nice = false) { nice.innerText = `Not for me!` }
-        // else { nice.innerText = ``};
+        //nice.innerText = `${beer.nice}`
+        if (beer.nice === true) { nice.innerText = `It's Yummy!` }
+        else if (beer.nice === false) { nice.innerText = `Not for me!` }
+        else { nice.innerText = `Not Working`};
         nice.classList.add("card-text")
         newCraftBeer.appendChild(nice);
 
