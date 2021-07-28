@@ -76,7 +76,7 @@
         axios.get(`${baseURL}/getBeerByID/${idOfBeer.value}`)
             .then(res => {
                 const beer = res.data;
-
+                
                 brewery.value = beer.brewery;
                 beerName.value = beer.name;
                 abv.value = beer.abv;
@@ -132,7 +132,7 @@
         newCraftBeer.appendChild(brewery);
 
         const beerName = document.createElement("p");
-        beerName.innerText = `Name: ${beer.name}`;
+        beerName.innerText = beer.name;
         beerName.classList.add("card-text");
         newCraftBeer.appendChild(beerName);
 
@@ -142,8 +142,10 @@
         newCraftBeer.appendChild(abv);
 
         const nice = document.createElement("p");
-        if (beer.nice = true) { nice.innerText = `It's Yummy!` }
-        else { nice.innerText = `Not for me!` };
+        //nice.innerText = `${beer.nice}`
+        if (beer.nice === true) { nice.innerText = `It's Yummy!` }
+        else if (beer.nice === false) { nice.innerText = `Not for me!` }
+        else { nice.innerText = `Not Working`};
         nice.classList.add("card-text")
         newCraftBeer.appendChild(nice);
 
