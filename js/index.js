@@ -14,6 +14,10 @@
     const getBeerByName = document.querySelector("#getBeerByName");
     const getAllOutput = document.querySelector("#getAllOutput");
     const getByNameOutput = document.querySelector("#getByNameOutput");
+    const updateBrewery = document.querySelector("#updateBrewery");
+    const updateBeerName = document.querySelector("#updateBeerName");
+    const updateAbv = document.querySelector("#updateAbv");
+    const updateNice = document.querySelector("#updateNice");
 
 
 
@@ -82,7 +86,7 @@
                 writeHistory(beer.id, brewery.value, beerName.value, abv.value, nice.value);
             }).catch
             (err => console.log(err));
-            //alert("Please try again with a different ID!") need to edit so only pops up when an error
+        //alert("Please try again with a different ID!") need to edit so only pops up when an error
     }
 
     document.querySelector("section#getBeerById > button").addEventListener("click", idSearch);
@@ -105,7 +109,7 @@
                 console.log("BEER DATA: ", beers[0]);
                 writeHistory(beers[0].id, beers[0].brewery, beers[0].name, beers[0].abv, beers[0].nice);
             }).catch(err => console.log(err));
-            // alert("Please try again with a different name!") need to edit so only pops up when an error
+        // alert("Please try again with a different name!") need to edit so only pops up when an error
     }
 
     document.querySelector("section#getBeerByName > button").addEventListener("click", nameSearch);
@@ -114,11 +118,11 @@
     const renderCraftBeer = (beer, outputDiv) => {
         const beerColumn = document.createElement('div');
         beerColumn.classList.add("col");
-    
+
         const beerCard = document.createElement('div');
         beerCard.classList.add("card");
         beerColumn.appendChild(beerCard);
-    
+
         const newCraftBeer = document.createElement("div");
         newCraftBeer.classList.add("card-body");
 
@@ -138,8 +142,8 @@
         newCraftBeer.appendChild(abv);
 
         const nice = document.createElement("p");
-        if( beer.nice = true) {nice.innerText = `It's Yummy!`}
-        else{nice.innerText = `Not for me!`};
+        if (beer.nice = true) { nice.innerText = `It's Yummy!` }
+        else { nice.innerText = `Not for me!` };
         nice.classList.add("card-text")
         newCraftBeer.appendChild(nice);
 
@@ -167,53 +171,56 @@
 
     }
 
-    const updateBeer = () => {
-        alert("It's working up to here")
-    const updateForm = document.querySelector("section#createBeer > form");
+    const updateBeer = id => {
+        console.log("It's working up to here");
+        axios.get(`${baseURL}/getBeerByID/${id}`)
+            .then(res => {
+                const beer = res.data;
+                console.log(res.data);
 
-    updateForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        
-        console.log("THIS: ", beerForm);
-        console.log("BREWERY: ", beerForm.brewery);
+                updateBrewery.value = beer.brewery;
+                updateBeerName.value = beer.name;
+                updateAbv.value = beer.abv;
+                updateNice.value = beer.nice;
 
-        const form = e.target;
+                console.log(beer.name);
+            })
 
-        const data = {
-            brewery: updateForm.brewery.value,
-            name: updateForm.beerName.value,
-            abv: updateForm.abv.value,
-            nice: updateForm.nice.value
-        }
+        const updateForm = document.querySelector("section#updateBeer > form");
 
-        console.log("DATA: ", data);
+        updateForm.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-    
-        axios.put(`${baseURL}/replaceBeer/${id}`)
-        .then(res => {
-            const updateHistory = document.createElement('p');
-            console.log(res);
-            getAllCraftBeers();
-            updateHistory.textContent = `Beer with ID: ${id} was updated`;
-            historyOutput.appendChild(updateHistory);
-            form.reset();
-                form.brewery.focus();
-        }).catch(err => console.log(err));
-    });
-}
+            console.log("THIS: ", beerForm);
+            console.log("BREWERY: ", beerForm.brewery);
+
+            const form = e.target;
+
+            const data = {
+                brewery: updateForm.brewery.value,
+                name: updateForm.beerName.value,
+                abv: updateForm.abv.value,
+                nice: updateForm.nice.value
+            }
+
+            console.log("DATA: ", data);
+
+
+            axios.put(`${baseURL}/replaceBeer/${id}`, data)
+                .then(res => {
+                    const updateHistory = document.createElement('p');
+                    console.log(res);
+                    getAllCraftBeers();
+                    updateHistory.textContent = `Beer with ID: ${id} was updated`;
+                    historyOutput.appendChild(updateHistory);
+                    form.reset();
+                    form.brewery.focus();
+                }).catch(err => console.log(err));
+        });
+    }
 
 
     const deleteBeer = id => {
-        document
-    .getElementById("confirmClickActionElementId")
-    .addEventListener("click", function( e ){ //e => event
-        if( ! confirm("Do you really want to do this?") ){
-            e.preventDefault(); // ! => don't want to do this
-        } else {
-            //want to do this! => maybe do something about it?
-            alert('Ok, lets do this!');
-        }
-    });
         axios.delete(`${baseURL}/deleteBeer/${id}`)
             .then(res => {
                 const deleteHistory = document.createElement('p');
