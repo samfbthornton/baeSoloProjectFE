@@ -18,7 +18,6 @@
     const updateBeerName = document.querySelector("#updateBeerName");
     const updateAbv = document.querySelector("#updateAbv");
     const updateNice = document.querySelector("#updateNice");
-    const getIdButton = document.querySelector("#getIdButton");
 
 
 
@@ -80,6 +79,10 @@
         axios.get(`${baseURL}/getBeerByID/${idOfBeer.value}`)
             .then(res => {
                 const beer = res.data;
+
+                // if (!beer.id) {
+                //     alert(`Beer does not exist. Please try again.`)
+                // }else{
                 
                 updateBrewery.value = beer.brewery;
                 updateBeerName.value = beer.name;
@@ -89,8 +92,9 @@
                 console.log("BEER DATA: ", beer);
 
                 writeHistory(beer.id, beer.brewery, beer.name, beer.abv, beer.nice);
-            }).catch
-            (err => console.log(err));
+            // }
+        }).catch(err => {
+                console.log(err)});
         //alert("Please try again with a different ID!") need to edit so only pops up when an error
     }
 
@@ -113,7 +117,8 @@
 
                 console.log("BEER DATA: ", beers[0]);
                 writeHistory(beers[0].id, beers[0].brewery, beers[0].name, beers[0].abv, beers[0].nice);
-            }).catch(err => console.log(err));
+            }).catch(err => {
+                console.log(err)});
         // alert("Please try again with a different name!") need to edit so only pops up when an error
     }
 
@@ -135,8 +140,8 @@
         newCraftBeer.style = "background-color: lightblue";
         newCraftBeer.classList.add("card-body");
 
-        const brewery = document.createElement("h3");
-        brewery.innerText = `Brewery: ${beer.brewery}`;
+        const brewery = document.createElement("h5");
+        brewery.innerText = `${beer.brewery}`;
         brewery.classList.add("card-text");
         newCraftBeer.appendChild(brewery);
 
@@ -146,7 +151,7 @@
         newCraftBeer.appendChild(beerName);
 
         const abv = document.createElement("p");
-        abv.innerText = `ABV: ${beer.abv}`;
+        abv.innerText = `ABV: %${beer.abv}`;
         abv.classList.add("card-text");
         newCraftBeer.appendChild(abv);
 
@@ -223,6 +228,7 @@
                     historyOutput.appendChild(updateHistory);
                     form.reset();
                     form.brewery.focus();
+                    alert(`Beer with ID: ${id} was updated.`)
                 }).catch(err => console.log(err));
         });
     }
