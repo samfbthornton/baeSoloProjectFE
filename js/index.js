@@ -10,8 +10,8 @@
     const abv = document.querySelector("#abv");
     const nice = document.querySelector("#nice");
     const historyOutput = document.querySelector("#history");
-    const getAllBeers = document.querySelector("#getAllBeers");
-    const getBeerByName = document.querySelector("#getBeerByName");
+    //const getAllBeers = document.querySelector("#getAllBeers");
+    //const getBeerByName = document.querySelector("#getBeerByName");
     const getAllOutput = document.querySelector("#getAllOutput");
     const getByNameOutput = document.querySelector("#getByNameOutput");
     const updateBrewery = document.querySelector("#updateBrewery");
@@ -80,7 +80,7 @@
             .then(res => {
                 const beer = res.data;
 
-                // if (!beer.id) {
+                // if (!`${baseURL}/getBeerByID/${idOfBeer.value}`) {
                 //     alert(`Beer does not exist. Please try again.`)
                 // }else{
                 
